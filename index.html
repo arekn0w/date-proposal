@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -27,24 +28,17 @@ body{
     justify-content:center;
     align-items:center;
     overflow:hidden;
-    background:
-    linear-gradient(
-        135deg,
-        #ff758c 0%,
-        #ff7eb3 50%,
-        #ffb199 100%
-    );
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
     padding:20px;
 }
 
-/* BACKGROUND BLURS */
+/* BACKGROUND */
 
 .bg-circle{
     position:absolute;
     border-radius:50%;
     filter:blur(80px);
     opacity:.4;
-    animation:floatBlob 12s ease-in-out infinite;
 }
 
 .circle1{
@@ -61,16 +55,6 @@ body{
     background:#ffb6d9;
     right:-100px;
     bottom:-100px;
-    animation-delay:2s;
-}
-
-@keyframes floatBlob{
-    0%,100%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-30px);
-    }
 }
 
 /* HEARTS */
@@ -83,226 +67,111 @@ body{
 }
 
 @keyframes floatHeart{
-    0%{
-        transform:
-            translateY(0)
-            translateX(0)
-            scale(.8);
-        opacity:0;
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            translateY(-120vh)
-            translateX(50px)
-            rotate(360deg)
-            scale(1.4);
-
-        opacity:0;
-    }
+    0%{transform:translateY(0) scale(.8);opacity:0;}
+    15%{opacity:1;}
+    100%{transform:translateY(-120vh) scale(1.4);opacity:0;}
 }
 
 /* CARD */
 
 .container{
     width:min(92%,800px);
-
-    padding:50px;
-
+    padding:45px;
     text-align:center;
     color:white;
-
     border-radius:32px;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,.20),
-        rgba(255,255,255,.08)
-    );
-
-    border:1px solid rgba(255,255,255,.20);
-
+    background:rgba(255,255,255,.12);
     backdrop-filter:blur(30px);
-    -webkit-backdrop-filter:blur(30px);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.20),
-        inset 0 1px 1px rgba(255,255,255,.25);
-
+    border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 30px 80px rgba(0,0,0,.2);
     position:relative;
-    overflow:hidden;
-
-    animation:cardIn .9s cubic-bezier(.22,1,.36,1);
-
-    z-index:5;
 }
 
-.container::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        120deg,
-        transparent 25%,
-        rgba(255,255,255,.12) 50%,
-        transparent 75%
-    );
-
-    transform:translateX(-120%);
-    animation:shine 8s linear infinite;
-}
-
-@keyframes shine{
-    to{
-        transform:translateX(120%);
-    }
-}
-
-@keyframes cardIn{
-    from{
-        opacity:0;
-        transform:
-        translateY(30px)
-        scale(.95);
-    }
-    to{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1);
-    }
-}
+/* TEXT */
 
 h1{
-    font-size:clamp(2rem,4vw,3.3rem);
-    margin-bottom:15px;
+    font-size:clamp(2rem,4vw,3rem);
+    margin-bottom:10px;
 }
 
 .subtitle{
-    font-size:1.1rem;
-    opacity:.95;
-    margin-bottom:35px;
-    transition:.3s ease;
+    margin-bottom:30px;
 }
 
+/* BUTTON AREA (IMPORTANT) */
+
 .buttons{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
+    position:relative;
+    width:100%;
+    height:150px;
 }
+
+/* BUTTONS */
 
 button{
     border:none;
     cursor:pointer;
-
-    min-width:140px;
-
-    padding:15px 42px;
-
     border-radius:999px;
-
-    font-size:1rem;
     font-weight:600;
-
-    transition:
-        transform .35s cubic-bezier(.22,1,.36,1),
-        box-shadow .35s cubic-bezier(.22,1,.36,1);
+    padding:15px 40px;
+    transition:all .4s cubic-bezier(.22,1,.36,1);
 }
 
-button:active{
-    transform:scale(.92);
-}
+/* YES BUTTON (ON TOP ALWAYS) */
 
 #yesBtn{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(1);
     background:white;
     color:#ff4f81;
-
-    box-shadow:
-    0 15px 35px rgba(255,255,255,.25);
-
-    transition:
-        transform .45s cubic-bezier(.22,1,.36,1),
-        box-shadow .45s cubic-bezier(.22,1,.36,1);
+    z-index:10;
 }
 
-#yesBtn:hover{
-    transform:translateY(-3px);
-}
+/* NO BUTTON (BEHIND YES) */
 
 #noBtn{
+    position:absolute;
+    left:60%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(1);
     background:#ff4f81;
     color:white;
-
-    box-shadow:
-    0 15px 35px rgba(255,79,129,.30);
-
-    transition:
-        transform .45s cubic-bezier(.22,1,.36,1),
-        box-shadow .45s cubic-bezier(.22,1,.36,1);
+    z-index:1;
 }
 
 /* LETTER */
 
 .love-letter{
-    margin-top:25px;
+    margin-top:20px;
     text-align:left;
-
-    padding:25px;
-
-    border-radius:20px;
-
+    padding:20px;
     background:rgba(255,255,255,.12);
-
-    line-height:1.9;
+    border-radius:16px;
 }
 
-/* SUCCESS */
-
-.success{
-    animation:successIn .8s cubic-bezier(.22,1,.36,1);
-}
-
-@keyframes successIn{
-    from{
-        opacity:0;
-        transform:
-        translateY(30px)
-        scale(.95);
-    }
-    to{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1);
-    }
-}
+/* MOBILE */
 
 @media(max-width:480px){
 
     .container{
-        padding:25px;
+        padding:20px;
     }
 
     .buttons{
-        flex-direction:column;
+        height:180px;
     }
 
     button{
-        width:100%;
+        padding:12px 28px;
+        font-size:.9rem;
     }
-
 }
+
 </style>
 </head>
+
 <body>
 
 <div class="bg-circle circle1"></div>
@@ -316,9 +185,7 @@ button:active{
 
     <h1>Hey OPIEEEEE 🤭</h1>
 
-    <p class="subtitle">
-        Would you like to go on a date with me? 🥺
-    </p>
+    <p class="subtitle">Would you like to go on a date with me? 🥺</p>
 
     <div class="buttons">
         <button id="yesBtn">Yes ❤️</button>
@@ -330,69 +197,40 @@ button:active{
 <script>
 
 /* MUSIC */
-
 const bgMusic = document.getElementById("bgMusic");
-
 let musicStarted = false;
 
 function startMusic(){
-
     if(musicStarted) return;
-
     musicStarted = true;
 
     bgMusic.volume = 0;
-
     bgMusic.play().catch(()=>{});
 
-    let vol = 0;
-
+    let v = 0;
     const fade = setInterval(()=>{
-
-        vol += 0.05;
-
-        bgMusic.volume = Math.min(vol,1);
-
-        if(vol >= 1){
-            clearInterval(fade);
-        }
-
+        v += 0.05;
+        bgMusic.volume = Math.min(v,1);
+        if(v>=1) clearInterval(fade);
     },120);
 }
 
 document.addEventListener("click",startMusic,{once:true});
-document.addEventListener("touchstart",startMusic,{once:true});
 
-/* FLOATING HEARTS */
-
+/* HEARTS */
 function createHeart(){
-
-    const heart = document.createElement("div");
-
-    heart.className = "heart";
-
-    heart.innerHTML = "❤️";
-
-    heart.style.left = Math.random()*100 + "vw";
-
-    heart.style.fontSize =
-    (Math.random()*18 + 16) + "px";
-
-    heart.style.animationDuration =
-    (Math.random()*4 + 5) + "s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },9000);
+    const h = document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*18+16)+"px";
+    h.style.animationDuration=(Math.random()*4+5)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),9000);
 }
-
 setInterval(createHeart,250);
 
-/* BUTTONS */
-
-/* BUTTONS */
+/* BUTTON LOGIC */
 
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
@@ -400,182 +238,83 @@ const subtitle = document.querySelector(".subtitle");
 
 let yesScale = 1;
 let noScale = 1;
+let clickCount = 0;
 
 const messages = [
     "Are you sure? 🥺",
-    "Really sure? HMMM",
+    "Really sure? 😏",
     "Think again 😘",
-    "I promise it'll be fun 🌹",
-    "Pretty please? 🥹",
+    "You're breaking my heart 💔",
+    "Pretty please 🥹",
     "I'll bring food 🍔",
-    "You're too cute to say no OPIEEEEE",
-    "Just one date I PROMISSEEE MAYBE HAHAHAH",
-    "Come onnnn OPIEEEE",
-    "You know you want to 😏",
-    "The YES button looks good right? 👀",
-    "Just click YES already 😂"
+    "Just say YES already 😭",
+    "Come onnnn ❤️",
+    "You know you want to 😏"
 ];
 
-let clickCount = 0;
+function update(){
 
-function updateButtons(){
-
-    yesBtn.style.transition =
-        "all .45s cubic-bezier(.22,1,.36,1)";
-
-    noBtn.style.transition =
-        "all .45s cubic-bezier(.22,1,.36,1)";
+    /* YES grows and moves center */
 
     yesBtn.style.transform =
-        `scale(${yesScale})`;
+        `translate(-50%,-50%) scale(${yesScale})`;
+
+    /* NO shrinks and gets pushed behind YES */
 
     noBtn.style.transform =
-        `scale(${noScale})`;
+        `translate(-50%,-50%) scale(${noScale})`;
+
+    noBtn.style.zIndex = "1";
+    yesBtn.style.zIndex = "10";
+
+    /* push NO away as YES grows */
+
+    const offset = clickCount * 8;
+
+    noBtn.style.left = `${60 + offset}%`;
 }
 
-noBtn.addEventListener("click", ()=>{
+noBtn.addEventListener("click",()=>{
 
     clickCount++;
 
-    yesScale += 0.18;
+    yesScale += 0.25;
 
-    if(noScale > 0.55){
-        noScale -= 0.04;
+    if(noScale > 0.5){
+        noScale -= 0.05;
     }
 
     subtitle.innerHTML =
-        messages[
-            Math.min(
-                clickCount,
-                messages.length - 1
-            )
-        ];
-    yesBtn.animate(
-        [
-            {
-                transform:`scale(${yesScale - 0.15})`
-            },
-            {
-                transform:`scale(${yesScale})`
-            }
-        ],
-        {
-            duration:450,
-            easing:"cubic-bezier(.22,1,.36,1)"
-        });
+        messages[Math.min(clickCount, messages.length-1)];
 
-    updateButtons();
+    /* smooth pop animation */
+    yesBtn.animate([
+        {transform:`translate(-50%,-50%) scale(${yesScale-0.2})`},
+        {transform:`translate(-50%,-50%) scale(${yesScale})`}
+    ],{
+        duration:400,
+        easing:"cubic-bezier(.22,1,.36,1)"
+    });
 
+    update();
 });
 
-/* INITIAL */
-updateButtons();
-
-/* CONFETTI */
-
-function launchConfetti(){
-
-    for(let i=0;i<200;i++){
-
-        const c = document.createElement("div");
-
-        c.style.position="fixed";
-        c.style.left=Math.random()*100+"vw";
-        c.style.top="-20px";
-
-        c.style.width="10px";
-        c.style.height="10px";
-
-        c.style.borderRadius="50%";
-
-        c.style.background=
-        `hsl(${Math.random()*360},100%,60%)`;
-
-        c.style.zIndex="9999";
-
-        document.body.appendChild(c);
-
-        c.animate(
-        [
-            {
-                transform:
-                "translateY(0) rotate(0deg)"
-            },
-            {
-                transform:
-                `translateY(${window.innerHeight+150}px)
-                rotate(${Math.random()*720}deg)`
-            }
-        ],
-        {
-            duration:2500 + Math.random()*2500,
-            easing:"cubic-bezier(.22,1,.36,1)"
-        });
-
-        setTimeout(()=>{
-            c.remove();
-        },5000);
-    }
-}
-
-/* YES */
-
+/* YES CLICK */
 yesBtn.addEventListener("click",()=>{
 
-    launchConfetti();
-
-    document.getElementById("mainCard").innerHTML = `
-
-    <div class="success">
-
-        <h1>OPIEEE Said Yes YOOOHOOO🥰</h1>
-
-        <p style="margin-top:15px;font-size:1.15rem;">
-            You just made my day 😙
-        </p>
-
-        <div class="love-letter">
-
-            <h2>A Letter For You</h2>
-
-            <br>
-
-            <p>Dear OPIEEEEE,</p>
-
-            <p>
-            Thank you for saying yes.
-            </p>
-
-            <p>
-            I promise I'll do my best to make
-            every moment special and memorable.
-            </p>
-
-            <p>
-            Lots of laughs, good food,
-            and beautiful memories await us.
-            </p>
-
-            <p>
-            Trust meeee 😌
-            </p>
-
-            <p>
-            See you soon, OPIEEEEEE.
-            </p>
-
-            <br>
-
-            <p>
-            😸
-            </p>
-
-        </div>
-
+    document.getElementById("mainCard").innerHTML=`
+    <h1>OPIEEEEE Said YES YOOOHOOOO 🥰</h1>
+    <p style="margin-top:15px;">You made my whole world happy 😭</p>
+    <div class="love-letter">
+        <h3>💌 A Letter</h3>
+        <p>Thank you for saying yes OPIEEEE🥹.</p>
+        <p>I will make this worth it, trust meee ❤️</p>
+        <p>See you soon OPIEEEEEE😌</p>
     </div>
-
     `;
 });
+
+update();
 
 </script>
 
