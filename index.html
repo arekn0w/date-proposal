@@ -101,9 +101,12 @@ h1{
 /* BUTTON AREA (IMPORTANT) */
 
 .buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
     position:relative;
-    width:100%;
-    height:150px;
+    min-height:120px;
 }
 
 /* BUTTONS */
@@ -120,25 +123,19 @@ button{
 /* YES BUTTON (ON TOP ALWAYS) */
 
 #yesBtn{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%) scale(1);
     background:white;
     color:#ff4f81;
-    z-index:10;
+    z-index:2;
+    position:relative;
 }
 
 /* NO BUTTON (BEHIND YES) */
 
 #noBtn{
-    position:absolute;
-    left:60%;
-    top:50%;
-    transform:translate(-50%,-50%) scale(1);
     background:#ff4f81;
     color:white;
     z-index:1;
+    position:relative;
 }
 
 /* LETTER */
@@ -254,33 +251,27 @@ const messages = [
 
 function update(){
 
-    /* YES grows and moves center */
-
     yesBtn.style.transform =
-        `translate(-50%,-50%) scale(${yesScale})`;
-
-    /* NO shrinks and gets pushed behind YES */
+        `scale(${yesScale})`;
 
     noBtn.style.transform =
-        `translate(-50%,-50%) scale(${noScale})`;
+        `scale(${noScale})`;
 
-    noBtn.style.zIndex = "1";
     yesBtn.style.zIndex = "10";
+    noBtn.style.zIndex = "1";
 
-    /* push NO away as YES grows */
-
-    const offset = clickCount * 8;
-
-    noBtn.style.left = `${60 + offset}%`;
+    if(clickCount >= 5){
+        noBtn.style.marginLeft = `-${(clickCount-4)*20}px`;
+    }
 }
 
 noBtn.addEventListener("click",()=>{
 
     clickCount++;
 
-    yesScale += 0.25;
+    yesScale += 0.15;;
 
-    if(noScale > 0.5){
+    if(noScale > 0.7){
         noScale -= 0.05;
     }
 
