@@ -228,6 +228,10 @@ button:active{
 
     box-shadow:
     0 15px 35px rgba(255,255,255,.25);
+
+    transition:
+        transform .45s cubic-bezier(.22,1,.36,1),
+        box-shadow .45s cubic-bezier(.22,1,.36,1);
 }
 
 #yesBtn:hover{
@@ -240,6 +244,10 @@ button:active{
 
     box-shadow:
     0 15px 35px rgba(255,79,129,.30);
+
+    transition:
+        transform .45s cubic-bezier(.22,1,.36,1),
+        box-shadow .45s cubic-bezier(.22,1,.36,1);
 }
 
 /* LETTER */
@@ -384,11 +392,14 @@ setInterval(createHeart,250);
 
 /* BUTTONS */
 
+/* BUTTONS */
+
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const subtitle = document.querySelector(".subtitle");
 
 let yesScale = 1;
+let noScale = 1;
 
 const messages = [
     "Are you sure? 🥺",
@@ -399,59 +410,66 @@ const messages = [
     "I'll bring food 🍔",
     "You're too cute to say no 😍",
     "Just one date 💕",
-    "You know you want to ❤️"
+    "Come onnnn ❤️",
+    "You know you want to 😏",
+    "The YES button looks good right? 👀",
+    "Just click YES already 😂❤️"
 ];
 
-let index = 0;
+let clickCount = 0;
 
-function growYes(){
+function updateButtons(){
 
-    yesScale += 0.12;
-
-    yesBtn.style.transform =
-    `scale(${yesScale})`;
-}
-
-function moveNoButton(){
-
-    const padding = 20;
-
-    const maxX =
-    window.innerWidth -
-    noBtn.offsetWidth -
-    padding;
-
-    const maxY =
-    window.innerHeight -
-    noBtn.offsetHeight -
-    padding;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.position = "fixed";
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    yesBtn.style.transition =
+        "all .45s cubic-bezier(.22,1,.36,1)";
 
     noBtn.style.transition =
-    "left .45s cubic-bezier(.22,1,.36,1), top .45s cubic-bezier(.22,1,.36,1)";
+        "all .45s cubic-bezier(.22,1,.36,1)";
+
+    yesBtn.style.transform =
+        `scale(${yesScale})`;
+
+    noBtn.style.transform =
+        `scale(${noScale})`;
 }
 
-/* RUN AWAY BUTTON */
+noBtn.addEventListener("click", ()=>{
 
-["mouseenter","mousemove","touchstart"].forEach(event=>{
-    noBtn.addEventListener(event,()=>{
-        moveNoButton();
+    clickCount++;
 
-        subtitle.innerHTML =
-        messages[Math.min(index,messages.length-1)];
+    yesScale += 0.18;
 
-        index++;
+    if(noScale > 0.55){
+        noScale -= 0.04;
+    }
 
-        growYes();
-    });
+    subtitle.innerHTML =
+        messages[
+            Math.min(
+                clickCount,
+                messages.length - 1
+            )
+        ];
+    yesBtn.animate(
+        [
+            {
+                transform:`scale(${yesScale - 0.15})`
+            },
+            {
+                transform:`scale(${yesScale})`
+            }
+        ],
+        {
+            duration:450,
+            easing:"cubic-bezier(.22,1,.36,1)"
+        });
+
+    updateButtons();
+
 });
+
+/* INITIAL */
+updateButtons();
 
 /* CONFETTI */
 
